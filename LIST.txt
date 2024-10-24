@@ -1,0 +1,223 @@
+#include<iostream>
+using namespace std;
+class LIST
+{
+    protected:
+    int n,a[10],pos,x;
+    int count=0;
+    public:
+    void input()
+    {
+        cout<<"Enter the size of the array:";
+        cin>>n;
+        cout<<"Enter the elements:";
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+    }
+    void insert()
+    {
+        cout<<"Enter the position to insert:";
+        cin>>pos;
+        if(pos>=0 && pos<=n+1)
+        {
+            cout<<"Enter the element to insert:";
+            cin>>x;
+            for(int i=n-1;i>=pos-1;i--)
+            {
+                a[i+1]=a[i];
+            }
+            a[pos-1]=x;
+            n++;
+            cout<<"Array after inserting element:";
+            for(int i=0;i<n;i++)
+            {
+                cout<<a[i]<<" ";
+            }
+        }
+    }
+    void del()
+    {
+        cout<<"Enter the position to delete:";
+        cin>>pos;
+        if(pos>=0 && pos<=n)
+        {
+            for(int i=pos;i<n;i++)
+            {
+                a[i-1]=a[i];
+            }
+            n--;
+            cout<<"Array after deleting an element:";
+            for(int i=0;i<n;i++)
+            {
+                cout<<a[i];
+            }
+        }
+    }
+    int position()
+    {
+        cout<<"Enter the element to find position:";
+        cin>>x;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]==x)
+            {
+                count++;
+                return i+1;
+            }
+        }
+        if(count==0)
+            return -1;
+    }
+    void sort()
+    {
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i;j<n;i++)
+            {
+                if(a[i]>a[j])
+                {
+                    count++;
+                    break;
+                }
+            }
+        }
+        if(count>=1)
+        {
+            cout<<"Element is not sorted";
+        }
+        else 
+            cout<<"Element is sorted";
+    }
+    void small()
+    {
+        int min=0;
+        min=a[0];
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]<min)
+                min=a[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(min==a[i])
+            {
+                cout<<"Position of the smallest element= "<<i+1;
+            }
+        }
+    }
+    void large()
+    {
+        int max=0;
+        max=a[0];
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]>max)
+                max=a[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]==max)
+            {
+                cout<<"Position of the largest element="<<i+1;
+            }
+        }
+    }
+    void sumsmall()
+    {
+        int min=0,count=0;
+        min=a[0];
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]<min)
+                min=a[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]==min)
+            {
+                count++;
+            }
+        }
+        cout<<"Sum of n smallest number="<<count*min;
+    }
+    void diff()
+    {
+        int b[10],max=0;
+        for(int i=0;i<n-1;i++)
+        {
+            b[i]=a[i]-a[i+1];
+        }
+        max=b[0];
+        for(int i=0;i<n-1;i++)
+        {
+            if(b[i]>max)
+                max=b[i];
+        }
+        cout<<"Largest difference between two  consecutive no="<<max;
+    }
+    void longseq()
+    {
+        int c=1,max=1;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]<a[i+1])
+                c++;
+            else
+            {
+                if(c>max)
+                    max=c;
+                c=1;
+            }
+        }
+        if(c>max)
+        {
+            max=c;
+        }
+        cout<<"Length of the longest subsequence="<<max;
+    }
+    
+};
+int main()
+{
+    LIST e;
+    int b;
+    /*cout<<"INSERTING AN ELEMENT IN THE GIVEN POSITION:\n\n";
+    e.input();
+    e.insert();
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"DELETING AN ELEMENT IN THE SPECIFIC POSITION:\n\n";
+    e.input();
+    e.del();
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"RETURN THE POSITION OF AN ELEMENT:\n\n";
+    e.input();
+    b=e.position();
+    cout<<"Position of the element="<<b;
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"CHECK WHETHER ARRAY IS SORTED OR NOT\n\n";
+    e.input();
+    e.sort();
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"\nFINDING POSITION OF THE SMALLEST ELEMENT:\n\n";
+    e.input();
+    e.small();
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"\nFINDING POSITION OF THE LARGEST ELEMENT:\n\n";
+    e.input();
+    e.large();
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"SUM OF N SMALLEST NO:\n\n";
+    e.input();
+    e.sumsmall();
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"LARGEST DIFFERENCE BETWEEN TWO CONSECUTIVE NO:\n\n";
+    e.input();
+    e.diff();
+    cout<<"\n--------------------------------------------------\n";
+    cout<<"LENGTH OF LONGEST SUBSEQUENCE:\n\n";
+    e.input();
+    e.longseq();
+    cout<"\n--------------------------------------------------\n";
+}
